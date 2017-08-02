@@ -95,7 +95,6 @@ class QuizApp extends React.Component {
   }
 
   componentDidMount() {
-    console.log('hi1')
     let shuffledEasy = this.shuffle(easyQuestions)
     let shuffledMedium = this.shuffle(mediumQuestions)
     let shuffledHard = this.shuffle(hardQuestions)

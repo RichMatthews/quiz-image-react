@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import rh from 'richs-helpers';
+//import rh from 'richs-helpers';
 
 import uk from '../images/uk.svg';
 import italy from '../images/italy.svg';
@@ -131,6 +131,10 @@ class QuizApp extends React.Component {
     }
   }
 
+  onEnter() {
+
+  }
+
   isItLastQuestion(){
     if (this.state.questionNumber == this.state.questions.length - 1){
       this.setState({ finished: true })
@@ -186,7 +190,7 @@ class QuizApp extends React.Component {
                 null
               }
             </div>
-            <div>
+            <div className="countryInput">
               <input ref="answerInput"/>
             </div>
             {lastQuestion ?

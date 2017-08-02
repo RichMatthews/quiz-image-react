@@ -17,7 +17,7 @@ import malawi from '../images/malawi.svg';
 import './index.scss';
 
 const easyQuestions = [{
-    answer: ['uk', 'united kingdom'],
+    answer: ['uk', '/', 'united kingdom'],
     svg: uk,
     category: 'easy'
   }, {
@@ -25,7 +25,7 @@ const easyQuestions = [{
     svg: italy,
     category: 'easy'
   }, {
-    answer: ['usa', 'united states', 'us'],
+    answer: ['usa', '/', 'united states', '/', 'us'],
     svg: usa,
     category: 'easy'
   }, {
@@ -76,7 +76,19 @@ class QuizApp extends React.Component {
    }
    this.checkAnswer = this.checkAnswer.bind(this);
    this.submitAnswer = this.submitAnswer.bind(this);
+   this.onEnter = this.onEnter.bind(this);
  }
+
+   onEnter(e, answer) {
+    if (e.key === 'Enter') {
+      this.submitAnswer(answer);
+      this.resetInput();
+    }
+  }
+
+  resetInput() {
+    this.refs.answerInput.value = '';
+  }
 
   submitAnswer(answer) {
     let newAnswer = answer.toLowerCase();
@@ -101,8 +113,15 @@ class QuizApp extends React.Component {
     let array = []
     let selectedQuestions = array
     .concat(shuffledEasy[0])
+    .concat(shuffledEasy[1])
+    .concat(shuffledEasy[2])
+    .concat(shuffledEasy[3])
     .concat(shuffledMedium[0])
+    .concat(shuffledMedium[1])
+    .concat(shuffledMedium[2])
+    .concat(shuffledMedium[3])
     .concat(shuffledHard[0])
+    .concat(shuffledHard[1])
     this.setState({ questions: selectedQuestions})
     //this.initiateQuiz();
   }
@@ -128,10 +147,6 @@ class QuizApp extends React.Component {
         return true;
       }
     }
-  }
-
-  onEnter() {
-
   }
 
   isItLastQuestion(){
@@ -175,6 +190,7 @@ class QuizApp extends React.Component {
   }
 
   render() {
+
     const { score, questions, questionNumber, lastQuestion, finished } = this.state;
     return (
       <div className="container">
@@ -190,7 +206,7 @@ class QuizApp extends React.Component {
               }
             </div>
             <div className="countryInput">
-              <input ref="answerInput"/>
+              <input onKeyPress={(e) => this.onEnter(e, this.refs.answerInput.value)} ref="answerInput"/>
             </div>
             {lastQuestion ?
               <div>
